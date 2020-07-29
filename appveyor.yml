@@ -42,6 +42,8 @@ install:
   - sh: which npm
   - ps: gcm npm
   - ps: dir ([System.IO.Path]::GetDirectoryName((gcm npm).Source))
+  - cmd: type "C:\Program Files (x86)\nodejs\npm.cmd"
+  - cmd: wmic datafile where Name="C:\\Program Files (x86)\\nodejs\\npm.cmd"
   # Sometimes one of the following `npm` commands fails -- perhaps due to a race condition / timing problem
   # The `ping` command below acts a substitute for "sleep 5s" to see if the problem goes away when a delay is inserted here
   #- cmd: ping -n 4 127.0.0.1
