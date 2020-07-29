@@ -19,12 +19,12 @@ install:
   # Use the latest matching version of Node.js that's installed
   #- cmd: IF NOT DEFINED skip_node_install powershell Install-Product node $env:nodejs_version
   - ps: |
-    try {
-      Get-Variable skip_node_install -Scope Global -ErrorAction 'Stop'
-      Install-Product node $env:nodejs_version
-    } catch [System.Management.Automation.ItemNotFoundException] {
-      echo "Using default node version"
-    }
+      try {
+        Get-Variable skip_node_install -Scope Global -ErrorAction 'Stop'
+        Install-Product node $env:nodejs_version
+      } catch [System.Management.Automation.ItemNotFoundException] {
+        echo "Using default node version"
+      }
   # DEBUG
   - cmd: echo %PATH%
   - node --version
