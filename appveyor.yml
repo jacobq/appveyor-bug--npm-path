@@ -4,19 +4,14 @@ image:
   - Previous Ubuntu
   - Ubuntu
 
-#environment:
+environment:
 #  nodejs_version: "14" # For Windows image (Linux uses "stack" property)
-
-# See if the problem is specific to Node.js version
-for:
-  -
-    environment:
-      takeDefaultNodeVersion: place-holder
-  -
-    environment:
+  # See if the problem is specific to Node.js version
+  matrix:
+    - job_name: Default Node.js
+    - job_name: Node.js 12.x
       nodejs_version: "12"
-  -
-    environment:
+    - job_name: Node.js 14.x
       nodejs_version: "14"
 
 install:
