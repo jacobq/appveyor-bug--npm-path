@@ -13,11 +13,17 @@ install:
   - cmd: echo %PATH%
   - node --version
   # Sometimes one of the following `npm` commands fails -- perhaps due to a race condition / timing problem
-  # The `ping` command below acts a substitute for "sleep 5s" to demonstrate that the problem goes away when a delay is inserted here
-  - ping 127.0.0.1
+  # The `ping` command below acts a substitute for "sleep 5s" to see if the problem goes away when a delay is inserted here
+  #- ping -n 10 127.0.0.1
+  - cmd: npm --version
+  - ps: npm --version
   - npm --version
+  - cmd: npm config --help
+  - ps: npm config --help
   - npm config --help
-  - npm config set spin false  # Make sure npm progress indicator / spinner is off
+  - cmd: npm config set spin false
+  - ps: npm config set spin false
+  - npm config set spin false
 
 build_script:
   - echo "Skip build"
