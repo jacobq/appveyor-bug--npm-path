@@ -13,28 +13,18 @@ environment:
     - job_name: Node.js 12.x
       nodejs_version: "12"
     - job_name: Node.js 14.x
-      nodejs_version: "14"
-
-# Use specified Node.js version on Linux also
-# (TODO: would be nice to just reference $nodejs_version here...)
-for:
-  - 
-    matrix:
-      only:
-        - job_name: Node.js 12.x
-    stack: node 12
-  - 
-    matrix:
-      only:
-        - job_name: Node.js 14.x
-    stack: node 14
-
-      
-
+      nodejs_version: "14"  
 
 install:
   # Use the latest matching version of Node.js that's installed
-  - cmd: IF NOT DEFINED skip_node_install powershell Install-Product node $env:nodejs_version
+  #- cmd: IF NOT DEFINED skip_node_install powershell Install-Product node $env:nodejs_version
+  - ps: |
+    try {
+      Get-Variable skip_node_install -Scope Global -ErrorAction 'Stop'
+      Install-Product node $env:nodejs_version
+    } catch [System.Management.Automation.ItemNotFoundException] {
+      echo "Using default node version"
+    }
   # DEBUG
   - cmd: echo %PATH%
   - node --version
