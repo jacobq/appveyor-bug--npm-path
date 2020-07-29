@@ -1,0 +1,23 @@
+image:
+  - Visual Studio 2019
+
+environment:
+  nodejs_version: "14" # For Windows image (Linux uses "stack" property)
+
+install:
+  # Use the latest matching version of Node.js that's installed
+  - cmd: powershell Install-Product node $env:nodejs_version
+  # Add node_modules/.bin to path for convenience
+  - cmd: set PATH=node_modules\.bin;%PATH%
+  # DEBUG
+  - cmd: echo %PATH
+  - node --version
+  - npm --version # Fails due to path problem
+  - npm config set spin false  # Make sure npm progress indicator / spinner is off
+
+build_script:
+  - echo "Skip build"
+
+# Post-install test scripts.
+test_script:
+  - echo "Skip test"
