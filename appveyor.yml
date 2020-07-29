@@ -1,8 +1,9 @@
 image:
-  - Previous Visual Studio 2019
+  #- Previous Visual Studio 2019
   - Visual Studio 2019
+  # Note: `ps: Install-Product node $env:nodejs_version` doesn't work on Linux
   #- Previous Ubuntu
-  - Ubuntu
+  #- Ubuntu
 
 environment:
   #nodejs_version: "14" # For Windows image (Linux uses "stack" property)
