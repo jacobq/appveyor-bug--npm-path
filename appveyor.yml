@@ -29,7 +29,8 @@ install:
   - node --version
   # Sometimes one of the following `npm` commands fails -- perhaps due to a race condition / timing problem
   # The `ping` command below acts a substitute for "sleep 5s" to see if the problem goes away when a delay is inserted here
-  - ping -n 10 127.0.0.1
+  - cmd: ping -n 4 127.0.0.1
+  - sh: ping -c 4 127.0.0.1
   - cmd: npm --version
   - ps: npm --version
   - npm --version
