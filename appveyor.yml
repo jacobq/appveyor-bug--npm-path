@@ -2,7 +2,7 @@ image:
   - Previous Visual Studio 2019
   - Visual Studio 2019
   #- Previous Ubuntu
-  - Ubuntu
+  #- Ubuntu
 
 environment:
 #  nodejs_version: "14" # For Windows image (Linux uses "stack" property)
@@ -18,11 +18,12 @@ environment:
 install:
   # Use the latest matching version of Node.js that's installed
   - cmd: IF NOT DEFINED skip_node_install powershell Install-Product node $env:nodejs_version
-  # Add node_modules/.bin to path for convenience
-  - cmd: set PATH=node_modules\.bin;%PATH%
   # DEBUG
   - cmd: echo %PATH%
   - node --version
+  - sh: which npm
+  - ps: gcm npm
+  - ps: dir ([System.IO.Path]::GetDirectoryName((gcm npm).Source))
   # Sometimes one of the following `npm` commands fails -- perhaps due to a race condition / timing problem
   # The `ping` command below acts a substitute for "sleep 5s" to see if the problem goes away when a delay is inserted here
   #- cmd: ping -n 4 127.0.0.1
