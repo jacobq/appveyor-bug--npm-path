@@ -5,8 +5,7 @@ image:
   - Ubuntu
 
 environment:
-#  nodejs_version: "14" # For Windows image (Linux uses "stack" property)
-  # See if the problem is specific to Node.js version
+  #nodejs_version: "14" # For Windows image (Linux uses "stack" property)
   matrix:
     - job_name: Default Node.js
       skip_node_install: 1
@@ -19,11 +18,10 @@ install:
   # Use the latest matching version of Node.js that's installed
   #- cmd: IF NOT DEFINED skip_node_install powershell Install-Product node $env:nodejs_version
   - ps: |
-      try {
-        Get-Variable skip_node_install -Scope Global -ErrorAction 'Stop'
-        Install-Product node $env:nodejs_version
-      } catch [System.Management.Automation.ItemNotFoundException] {
+      If ($env:skip_node_install) {
         echo "Using default node version"
+      } else {
+        Install-Product node $env:nodejs_version
       }
   # DEBUG
   - cmd: echo %PATH%
