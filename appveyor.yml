@@ -1,5 +1,8 @@
 image:
+  - Previous Visual Studio 2019
   - Visual Studio 2019
+  - Previous Ubuntu
+  - Ubuntu
 
 environment:
   nodejs_version: "14" # For Windows image (Linux uses "stack" property)
@@ -14,7 +17,7 @@ install:
   - node --version
   # Sometimes one of the following `npm` commands fails -- perhaps due to a race condition / timing problem
   # The `ping` command below acts a substitute for "sleep 5s" to see if the problem goes away when a delay is inserted here
-  #- ping -n 10 127.0.0.1
+  - ping -n 10 127.0.0.1
   - cmd: npm --version
   - ps: npm --version
   - npm --version
