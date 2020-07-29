@@ -1,7 +1,7 @@
 image:
   - Previous Visual Studio 2019
   - Visual Studio 2019
-  - Previous Ubuntu
+  #- Previous Ubuntu
   - Ubuntu
 
 environment:
@@ -9,6 +9,7 @@ environment:
   # See if the problem is specific to Node.js version
   matrix:
     - job_name: Default Node.js
+      skip_node_install: 1
     - job_name: Node.js 12.x
       nodejs_version: "12"
     - job_name: Node.js 14.x
@@ -16,7 +17,7 @@ environment:
 
 install:
   # Use the latest matching version of Node.js that's installed
-  - cmd: powershell Install-Product node $env:nodejs_version
+  - cmd: IF NOT DEFINED skip_node_install powershell Install-Product node $env:nodejs_version
   # Add node_modules/.bin to path for convenience
   - cmd: set PATH=node_modules\.bin;%PATH%
   # DEBUG
@@ -24,8 +25,8 @@ install:
   - node --version
   # Sometimes one of the following `npm` commands fails -- perhaps due to a race condition / timing problem
   # The `ping` command below acts a substitute for "sleep 5s" to see if the problem goes away when a delay is inserted here
-  - cmd: ping -n 4 127.0.0.1
-  - sh: ping -c 4 127.0.0.1
+  #- cmd: ping -n 4 127.0.0.1
+  #- sh: ping -c 4 127.0.0.1
   - cmd: npm --version
   - ps: npm --version
   - npm --version
