@@ -53,3 +53,12 @@ build_script:
 # Post-install test scripts.
 test_script:
   - echo "Skip test"
+  
+  
+# Try again just for kicks
+on_failure:
+  # The `ping` command below acts a substitute for "sleep 5s" to see if the problem goes away when a delay is inserted here
+  - cmd: ping -n 5 127.0.0.1
+  - cmd: npm --version
+  - cmd: npm set config spin false
+
