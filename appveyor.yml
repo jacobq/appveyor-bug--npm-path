@@ -4,8 +4,20 @@ image:
   - Previous Ubuntu
   - Ubuntu
 
-environment:
-  nodejs_version: "14" # For Windows image (Linux uses "stack" property)
+#environment:
+#  nodejs_version: "14" # For Windows image (Linux uses "stack" property)
+
+# See if the problem is specific to Node.js version
+for:
+  -
+    environment:
+      takeDefaultNodeVersion: place-holder
+  -
+    environment:
+      nodejs_version: "12"
+  -
+    environment:
+      nodejs_version: "14"
 
 install:
   # Use the latest matching version of Node.js that's installed
